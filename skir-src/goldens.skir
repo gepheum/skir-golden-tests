@@ -52,6 +52,17 @@ enum Assertion {
     expected_byte_prefix: bytes;
   }
   reserialize_large_array: ReserializeLargeArray;
+
+  struct IsConstantA {
+    actual: TypedValue;
+  }
+  is_constant_a: IsConstantA;
+
+  struct IsWrapperB {
+    actual: TypedValue;
+    expected: string;
+  }
+  is_wrapper_b: IsWrapperB;
 }
 
 enum StringExpression {
@@ -80,6 +91,8 @@ enum TypedValue {
   point: Point;
   color: Color;
   my_enum: MyEnum;
+  enum_a: EnumA;
+  enum_b: EnumB;
   keyed_arrays: KeyedArrays;
   rec_struct: RecStruct;
   rec_enum: RecEnum;
@@ -98,6 +111,14 @@ enum TypedValue {
   my_enum_from_json_drop_unrecognized: StringExpression;
   my_enum_from_bytes_keep_unrecognized: BytesExpression;
   my_enum_from_bytes_drop_unrecognized: BytesExpression;
+  enum_a_from_json_keep_unrecognized: StringExpression;
+  enum_a_from_json_drop_unrecognized: StringExpression;
+  enum_a_from_bytes_keep_unrecognized: BytesExpression;
+  enum_a_from_bytes_drop_unrecognized: BytesExpression;
+  enum_b_from_json_keep_unrecognized: StringExpression;
+  enum_b_from_json_drop_unrecognized: StringExpression;
+  enum_b_from_bytes_keep_unrecognized: BytesExpression;
+  enum_b_from_bytes_drop_unrecognized: BytesExpression;
 }
 
 /// A point
@@ -126,6 +147,16 @@ enum MyEnum {
   color: Color = 4;
   bool: bool = 5;
   removed 2;
+}
+
+enum EnumA {
+  A;
+  OTHER;
+}
+
+enum EnumB {
+  b: string;
+  OTHER;
 }
 
 struct KeyedArrays {
@@ -2274,6 +2305,178 @@ const UNIT_TESTS: [UnitTest] = [
         ],
         expected_type_descriptor: "{\n  \"type\": {\n    \"kind\": \"record\",\n    \"value\": \"@gepheum/skir-golden-tests/goldens.skir:RecEnum\"\n  },\n  \"records\": [\n    {\n      \"kind\": \"enum\",\n      \"id\": \"@gepheum/skir-golden-tests/goldens.skir:RecEnum\",\n      \"variants\": [\n        {\n          \"name\": \"FOO\",\n          \"number\": 1\n        },\n        {\n          \"name\": \"e\",\n          \"number\": 2,\n          \"type\": {\n            \"kind\": \"record\",\n            \"value\": \"@gepheum/skir-golden-tests/goldens.skir:RecEnum\"\n          }\n        }\n      ]\n    }\n  ]\n}",
       |},
+    },
+  },
+  {
+    test_number: 1087,
+    assertion: {
+      kind: "is_constant_a",
+      value: {
+        actual: {
+          kind: "enum_a_from_json_keep_unrecognized",
+          value: {
+            kind: "to_dense_json",
+            value: {
+              kind: "enum_b_from_json_keep_unrecognized",
+              value: {
+                kind: "to_dense_json",
+                value: {
+                  kind: "enum_a",
+                  value: "A",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+  {
+    test_number: 1088,
+    assertion: {
+      kind: "is_constant_a",
+      value: {
+        actual: {
+          kind: "enum_a_from_bytes_keep_unrecognized",
+          value: {
+            kind: "to_bytes",
+            value: {
+              kind: "enum_b_from_bytes_keep_unrecognized",
+              value: {
+                kind: "to_bytes",
+                value: {
+                  kind: "enum_a",
+                  value: "A",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+  {
+    test_number: 1089,
+    assertion: {
+      kind: "is_wrapper_b",
+      value: {
+        actual: {
+          kind: "enum_b_from_json_keep_unrecognized",
+          value: {
+            kind: "to_dense_json",
+            value: {
+              kind: "enum_a_from_json_keep_unrecognized",
+              value: {
+                kind: "to_dense_json",
+                value: {
+                  kind: "enum_b",
+                  value: {
+                    kind: "b",
+                    value: "foo",
+                  },
+                },
+              },
+            },
+          },
+        },
+        expected: "foo",
+      },
+    },
+  },
+  {
+    test_number: 1090,
+    assertion: {
+      kind: "is_wrapper_b",
+      value: {
+        actual: {
+          kind: "enum_b_from_json_keep_unrecognized",
+          value: {
+            kind: "to_dense_json",
+            value: {
+              kind: "enum_a_from_bytes_drop_unrecognized",
+              value: {
+                kind: "to_bytes",
+                value: {
+                  kind: "enum_b",
+                  value: {
+                    kind: "b",
+                    value: "foo",
+                  },
+                },
+              },
+            },
+          },
+        },
+        expected: "",
+      },
+    },
+  },
+  {
+    test_number: 1091,
+    assertion: {
+      kind: "is_wrapper_b",
+      value: {
+        actual: {
+          kind: "enum_b_from_bytes_keep_unrecognized",
+          value: {
+            kind: "to_bytes",
+            value: {
+              kind: "enum_a_from_json_keep_unrecognized",
+              value: {
+                kind: "to_dense_json",
+                value: {
+                  kind: "enum_b_from_bytes_keep_unrecognized",
+                  value: {
+                    kind: "to_bytes",
+                    value: {
+                      kind: "enum_b",
+                      value: {
+                        kind: "b",
+                        value: "foo",
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+        expected: "foo",
+      },
+    },
+  },
+  {
+    test_number: 1092,
+    assertion: {
+      kind: "is_wrapper_b",
+      value: {
+        actual: {
+          kind: "enum_b_from_bytes_keep_unrecognized",
+          value: {
+            kind: "to_bytes",
+            value: {
+              kind: "enum_a_from_json_drop_unrecognized",
+              value: {
+                kind: "to_dense_json",
+                value: {
+                  kind: "enum_b_from_bytes_keep_unrecognized",
+                  value: {
+                    kind: "to_bytes",
+                    value: {
+                      kind: "enum_b",
+                      value: {
+                        kind: "b",
+                        value: "foo",
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+        expected: "",
+      },
     },
   },
 ];
