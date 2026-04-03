@@ -2393,9 +2393,9 @@ const UNIT_TESTS: [UnitTest] = [
           value: {
             kind: "to_dense_json",
             value: {
-              kind: "enum_a_from_bytes_drop_unrecognized",
+              kind: "enum_a_from_json_drop_unrecognized",
               value: {
-                kind: "to_bytes",
+                kind: "to_dense_json",
                 value: {
                   kind: "enum_b",
                   value: {
@@ -2421,20 +2421,14 @@ const UNIT_TESTS: [UnitTest] = [
           value: {
             kind: "to_bytes",
             value: {
-              kind: "enum_a_from_json_keep_unrecognized",
+              kind: "enum_a_from_bytes_keep_unrecognized",
               value: {
-                kind: "to_dense_json",
+                kind: "to_bytes",
                 value: {
-                  kind: "enum_b_from_bytes_keep_unrecognized",
+                  kind: "enum_b",
                   value: {
-                    kind: "to_bytes",
-                    value: {
-                      kind: "enum_b",
-                      value: {
-                        kind: "b",
-                        value: "foo",
-                      },
-                    },
+                    kind: "b",
+                    value: "foo",
                   },
                 },
               },
@@ -2455,20 +2449,14 @@ const UNIT_TESTS: [UnitTest] = [
           value: {
             kind: "to_bytes",
             value: {
-              kind: "enum_a_from_json_drop_unrecognized",
+              kind: "enum_a_from_bytes_drop_unrecognized",
               value: {
-                kind: "to_dense_json",
+                kind: "to_bytes",
                 value: {
-                  kind: "enum_b_from_bytes_keep_unrecognized",
+                  kind: "enum_b",
                   value: {
-                    kind: "to_bytes",
-                    value: {
-                      kind: "enum_b",
-                      value: {
-                        kind: "b",
-                        value: "foo",
-                      },
-                    },
+                    kind: "b",
+                    value: "foo",
                   },
                 },
               },
