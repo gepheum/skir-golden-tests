@@ -53,16 +53,27 @@ enum Assertion {
   }
   reserialize_large_array: ReserializeLargeArray;
 
-  struct IsConstantA {
-    actual: TypedValue;
-  }
-  is_constant_a: IsConstantA;
+  enum_a_from_json_is_constant: struct {
+    actual: StringExpression;
+    keep_unrecognized: bool;
+  };
 
-  struct IsWrapperB {
-    actual: TypedValue;
+  enum_a_from_bytes_is_constant: struct {
+    actual: BytesExpression;
+    keep_unrecognized: bool;
+  };
+
+  enum_b_from_json_is_wrapper_b: struct {
+    actual: StringExpression;
     expected: string;
-  }
-  is_wrapper_b: IsWrapperB;
+    keep_unrecognized: bool;
+  };
+
+  enum_b_from_bytes_is_wrapper_b: struct {
+    actual: BytesExpression;
+    expected: string;
+    keep_unrecognized: bool;
+  };
 }
 
 enum StringExpression {
@@ -2310,320 +2321,292 @@ const UNIT_TESTS: [UnitTest] = [
   {
     test_number: 1087,
     assertion: {
-      kind: "is_constant_a",
+      kind: "enum_a_from_json_is_constant",
       value: {
         actual: {
-          kind: "enum_a_from_json_keep_unrecognized",
+          kind: "to_dense_json",
           value: {
-            kind: "to_dense_json",
+            kind: "enum_b_from_json_keep_unrecognized",
             value: {
-              kind: "enum_b_from_json_keep_unrecognized",
+              kind: "to_dense_json",
               value: {
-                kind: "to_dense_json",
-                value: {
-                  kind: "enum_a",
-                  value: "A",
-                },
+                kind: "enum_a",
+                value: "A",
               },
             },
           },
         },
+        keep_unrecognized: true,
       },
     },
   },
   {
     test_number: 1088,
     assertion: {
-      kind: "is_constant_a",
+      kind: "enum_a_from_bytes_is_constant",
       value: {
         actual: {
-          kind: "enum_a_from_bytes_keep_unrecognized",
+          kind: "to_bytes",
           value: {
-            kind: "to_bytes",
+            kind: "enum_b_from_bytes_keep_unrecognized",
             value: {
-              kind: "enum_b_from_bytes_keep_unrecognized",
+              kind: "to_bytes",
               value: {
-                kind: "to_bytes",
-                value: {
-                  kind: "enum_a",
-                  value: "A",
-                },
+                kind: "enum_a",
+                value: "A",
               },
             },
           },
         },
+        keep_unrecognized: true,
       },
     },
   },
   {
     test_number: 1089,
     assertion: {
-      kind: "is_wrapper_b",
+      kind: "enum_b_from_json_is_wrapper_b",
       value: {
         actual: {
-          kind: "enum_b_from_json_keep_unrecognized",
+          kind: "to_dense_json",
           value: {
-            kind: "to_dense_json",
+            kind: "enum_a_from_json_keep_unrecognized",
             value: {
-              kind: "enum_a_from_json_keep_unrecognized",
+              kind: "to_dense_json",
               value: {
-                kind: "to_dense_json",
+                kind: "enum_b",
                 value: {
-                  kind: "enum_b",
-                  value: {
-                    kind: "b",
-                    value: "foo",
-                  },
+                  kind: "b",
+                  value: "foo",
                 },
               },
             },
           },
         },
         expected: "foo",
+        keep_unrecognized: true,
       },
     },
   },
   {
     test_number: 1090,
     assertion: {
-      kind: "is_wrapper_b",
+      kind: "enum_b_from_json_is_wrapper_b",
       value: {
         actual: {
-          kind: "enum_b_from_json_keep_unrecognized",
+          kind: "to_dense_json",
           value: {
-            kind: "to_dense_json",
+            kind: "enum_a_from_json_drop_unrecognized",
             value: {
-              kind: "enum_a_from_json_drop_unrecognized",
+              kind: "to_dense_json",
               value: {
-                kind: "to_dense_json",
+                kind: "enum_b",
                 value: {
-                  kind: "enum_b",
-                  value: {
-                    kind: "b",
-                    value: "foo",
-                  },
+                  kind: "b",
+                  value: "foo",
                 },
               },
             },
           },
         },
         expected: "",
+        keep_unrecognized: true,
       },
     },
   },
   {
     test_number: 1091,
     assertion: {
-      kind: "is_wrapper_b",
+      kind: "enum_b_from_bytes_is_wrapper_b",
       value: {
         actual: {
-          kind: "enum_b_from_bytes_keep_unrecognized",
+          kind: "to_bytes",
           value: {
-            kind: "to_bytes",
+            kind: "enum_a_from_bytes_keep_unrecognized",
             value: {
-              kind: "enum_a_from_bytes_keep_unrecognized",
+              kind: "to_bytes",
               value: {
-                kind: "to_bytes",
+                kind: "enum_b",
                 value: {
-                  kind: "enum_b",
-                  value: {
-                    kind: "b",
-                    value: "foo",
-                  },
+                  kind: "b",
+                  value: "foo",
                 },
               },
             },
           },
         },
         expected: "foo",
+        keep_unrecognized: true,
       },
     },
   },
   {
     test_number: 1092,
     assertion: {
-      kind: "is_wrapper_b",
+      kind: "enum_b_from_bytes_is_wrapper_b",
       value: {
         actual: {
-          kind: "enum_b_from_bytes_keep_unrecognized",
+          kind: "to_bytes",
           value: {
-            kind: "to_bytes",
+            kind: "enum_a_from_bytes_drop_unrecognized",
             value: {
-              kind: "enum_a_from_bytes_drop_unrecognized",
+              kind: "to_bytes",
               value: {
-                kind: "to_bytes",
+                kind: "enum_b",
                 value: {
-                  kind: "enum_b",
-                  value: {
-                    kind: "b",
-                    value: "foo",
-                  },
+                  kind: "b",
+                  value: "foo",
                 },
               },
             },
           },
         },
         expected: "",
+        keep_unrecognized: true,
       },
     },
   },
   {
     test_number: 1093,
     assertion: {
-      kind: "is_wrapper_b",
+      kind: "enum_b_from_json_is_wrapper_b",
       value: {
         actual: {
-          kind: "enum_b_from_json_keep_unrecognized",
+          kind: "to_dense_json",
           value: {
-            kind: "to_dense_json",
-            value: {
-              kind: "enum_a",
-              value: "A",
-            },
+            kind: "enum_a",
+            value: "A",
           },
         },
         expected: "",
+        keep_unrecognized: true,
       },
     },
   },
   {
     test_number: 1094,
     assertion: {
-      kind: "is_wrapper_b",
+      kind: "enum_b_from_bytes_is_wrapper_b",
       value: {
         actual: {
-          kind: "enum_b_from_bytes_keep_unrecognized",
+          kind: "to_bytes",
           value: {
-            kind: "to_bytes",
-            value: {
-              kind: "enum_a",
-              value: "A",
-            },
+            kind: "enum_a",
+            value: "A",
           },
         },
         expected: "",
+        keep_unrecognized: true,
       },
     },
   },
   {
     test_number: 1095,
     assertion: {
-      kind: "is_constant_a",
+      kind: "enum_a_from_json_is_constant",
       value: {
         actual: {
-          kind: "enum_a_from_json_keep_unrecognized",
+          kind: "to_dense_json",
           value: {
-            kind: "to_dense_json",
+            kind: "enum_b",
             value: {
-              kind: "enum_b",
-              value: {
-                kind: "b",
-                value: "foo",
-              },
+              kind: "b",
+              value: "foo",
             },
           },
         },
+        keep_unrecognized: true,
       },
     },
   },
   {
     test_number: 1096,
     assertion: {
-      kind: "is_constant_a",
+      kind: "enum_a_from_bytes_is_constant",
       value: {
         actual: {
-          kind: "enum_a_from_bytes_keep_unrecognized",
+          kind: "to_bytes",
           value: {
-            kind: "to_bytes",
+            kind: "enum_b",
             value: {
-              kind: "enum_b",
-              value: {
-                kind: "b",
-                value: "foo",
-              },
+              kind: "b",
+              value: "foo",
             },
           },
         },
+        keep_unrecognized: true,
       },
     },
   },
   {
     test_number: 1097,
     assertion: {
-      kind: "is_wrapper_b",
+      kind: "enum_b_from_json_is_wrapper_b",
       value: {
         actual: {
-          kind: "enum_b_from_json_drop_unrecognized",
+          kind: "to_dense_json",
           value: {
-            kind: "to_dense_json",
-            value: {
-              kind: "enum_a",
-              value: "A",
-            },
+            kind: "enum_a",
+            value: "A",
           },
         },
         expected: "",
+        keep_unrecognized: false,
       },
     },
   },
   {
     test_number: 1098,
     assertion: {
-      kind: "is_wrapper_b",
+      kind: "enum_b_from_bytes_is_wrapper_b",
       value: {
         actual: {
-          kind: "enum_b_from_bytes_drop_unrecognized",
+          kind: "to_bytes",
           value: {
-            kind: "to_bytes",
-            value: {
-              kind: "enum_a",
-              value: "A",
-            },
+            kind: "enum_a",
+            value: "A",
           },
         },
         expected: "",
+        keep_unrecognized: false,
       },
     },
   },
   {
     test_number: 1099,
     assertion: {
-      kind: "is_constant_a",
+      kind: "enum_a_from_json_is_constant",
       value: {
         actual: {
-          kind: "enum_a_from_json_drop_unrecognized",
+          kind: "to_dense_json",
           value: {
-            kind: "to_dense_json",
+            kind: "enum_b",
             value: {
-              kind: "enum_b",
-              value: {
-                kind: "b",
-                value: "foo",
-              },
+              kind: "b",
+              value: "foo",
             },
           },
         },
+        keep_unrecognized: false,
       },
     },
   },
   {
     test_number: 1100,
     assertion: {
-      kind: "is_constant_a",
+      kind: "enum_a_from_bytes_is_constant",
       value: {
         actual: {
-          kind: "enum_a_from_bytes_drop_unrecognized",
+          kind: "to_bytes",
           value: {
-            kind: "to_bytes",
+            kind: "enum_b",
             value: {
-              kind: "enum_b",
-              value: {
-                kind: "b",
-                value: "foo",
-              },
+              kind: "b",
+              value: "foo",
             },
           },
         },
+        keep_unrecognized: false,
       },
     },
   },
