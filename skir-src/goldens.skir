@@ -1357,6 +1357,12 @@ const UNIT_TESTS: [UnitTest] = [
         expected_readable_json: [
           '"UNKNOWN"',
         ],
+        alternative_jsons: [
+          {
+            kind: "literal",
+            value: '"unknown"',
+          },
+        ],
         expected_bytes: [
           "hex:736b697200",
         ],
@@ -1378,6 +1384,12 @@ const UNIT_TESTS: [UnitTest] = [
         ],
         expected_readable_json: [
           '"OK"',
+        ],
+        alternative_jsons: [
+          {
+            kind: "literal",
+            value: '"ok"',
+          },
         ],
         expected_bytes: [
           "hex:736b697201",
