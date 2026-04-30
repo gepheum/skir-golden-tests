@@ -154,25 +154,25 @@ struct Color {
 /// my enum
 enum MyEnum {
   /// all good
-  OK = 1;
+  ok = 1;
   color: Color = 4;
   bool: bool = 5;
   removed 2;
 }
 
 enum EnumA {
-  A;
-  OTHER;
+  a;
+  other;
 }
 
 enum EnumB {
   b: string;
-  OTHER;
+  other;
 }
 
 struct KeyedArrays {
   enum Weekday {
-    MONDAY;
+    monday;
   }
   struct SubItem {
     weekday: Weekday;
@@ -189,7 +189,7 @@ struct RecStruct {
 }
 
 enum RecEnum {
-  FOO;
+  foo;
   e: RecEnum;
 }
 
@@ -1366,7 +1366,7 @@ const UNIT_TESTS: [UnitTest] = [
         expected_bytes: [
           "hex:736b697200",
         ],
-        expected_type_descriptor: "{\n  \"type\": {\n    \"kind\": \"record\",\n    \"value\": \"@gepheum/skir-golden-tests/goldens.skir:MyEnum\"\n  },\n  \"records\": [\n    {\n      \"kind\": \"enum\",\n      \"id\": \"@gepheum/skir-golden-tests/goldens.skir:MyEnum\",\n      \"doc\": \"my enum\",\n      \"variants\": [\n        {\n          \"name\": \"OK\",\n          \"number\": 1,\n          \"doc\": \"all good\"\n        },\n        {\n          \"name\": \"color\",\n          \"number\": 4,\n          \"type\": {\n            \"kind\": \"record\",\n            \"value\": \"@gepheum/skir-golden-tests/goldens.skir:Color\"\n          }\n        },\n        {\n          \"name\": \"bool\",\n          \"number\": 5,\n          \"type\": {\n            \"kind\": \"primitive\",\n            \"value\": \"bool\"\n          }\n        }\n      ],\n      \"removed_numbers\": [\n        2\n      ]\n    },\n    {\n      \"kind\": \"struct\",\n      \"id\": \"@gepheum/skir-golden-tests/goldens.skir:Color\",\n      \"fields\": [\n        {\n          \"name\": \"r\",\n          \"number\": 0,\n          \"type\": {\n            \"kind\": \"primitive\",\n            \"value\": \"int32\"\n          }\n        },\n        {\n          \"name\": \"g\",\n          \"number\": 1,\n          \"type\": {\n            \"kind\": \"primitive\",\n            \"value\": \"int32\"\n          }\n        },\n        {\n          \"name\": \"b\",\n          \"number\": 2,\n          \"type\": {\n            \"kind\": \"primitive\",\n            \"value\": \"int32\"\n          }\n        }\n      ],\n      \"removed_numbers\": [\n        3\n      ]\n    }\n  ]\n}",
+        expected_type_descriptor: "{\n  \"type\": {\n    \"kind\": \"record\",\n    \"value\": \"@gepheum/skir-golden-tests/goldens.skir:MyEnum\"\n  },\n  \"records\": [\n    {\n      \"kind\": \"enum\",\n      \"id\": \"@gepheum/skir-golden-tests/goldens.skir:MyEnum\",\n      \"doc\": \"my enum\",\n      \"variants\": [\n        {\n          \"name\": \"ok\",\n          \"number\": 1,\n          \"doc\": \"all good\"\n        },\n        {\n          \"name\": \"color\",\n          \"number\": 4,\n          \"type\": {\n            \"kind\": \"record\",\n            \"value\": \"@gepheum/skir-golden-tests/goldens.skir:Color\"\n          }\n        },\n        {\n          \"name\": \"bool\",\n          \"number\": 5,\n          \"type\": {\n            \"kind\": \"primitive\",\n            \"value\": \"bool\"\n          }\n        }\n      ],\n      \"removed_numbers\": [\n        2\n      ]\n    },\n    {\n      \"kind\": \"struct\",\n      \"id\": \"@gepheum/skir-golden-tests/goldens.skir:Color\",\n      \"fields\": [\n        {\n          \"name\": \"r\",\n          \"number\": 0,\n          \"type\": {\n            \"kind\": \"primitive\",\n            \"value\": \"int32\"\n          }\n        },\n        {\n          \"name\": \"g\",\n          \"number\": 1,\n          \"type\": {\n            \"kind\": \"primitive\",\n            \"value\": \"int32\"\n          }\n        },\n        {\n          \"name\": \"b\",\n          \"number\": 2,\n          \"type\": {\n            \"kind\": \"primitive\",\n            \"value\": \"int32\"\n          }\n        }\n      ],\n      \"removed_numbers\": [\n        3\n      ]\n    }\n  ]\n}",
       |},
     },
   },
@@ -1377,18 +1377,18 @@ const UNIT_TESTS: [UnitTest] = [
       value: {|
         value: {
           kind: "my_enum",
-          value: "OK",
+          value: "ok",
         },
         expected_dense_json: [
           "1",
         ],
         expected_readable_json: [
-          '"OK"',
+          '"ok"',
         ],
         alternative_jsons: [
           {
             kind: "literal",
-            value: '"ok"',
+            value: '"OK"',
           },
         ],
         expected_bytes: [
@@ -2271,7 +2271,7 @@ const UNIT_TESTS: [UnitTest] = [
         expected_bytes: [
           "hex:736b6972f6",
         ],
-        expected_type_descriptor: "{\n  \"type\": {\n    \"kind\": \"record\",\n    \"value\": \"@gepheum/skir-golden-tests/goldens.skir:KeyedArrays\"\n  },\n  \"records\": [\n    {\n      \"kind\": \"struct\",\n      \"id\": \"@gepheum/skir-golden-tests/goldens.skir:KeyedArrays\",\n      \"fields\": [\n        {\n          \"name\": \"items\",\n          \"number\": 0,\n          \"type\": {\n            \"kind\": \"array\",\n            \"value\": {\n              \"item\": {\n                \"kind\": \"record\",\n                \"value\": \"@gepheum/skir-golden-tests/goldens.skir:KeyedArrays.Item\"\n              },\n              \"key_extractor\": \"sub_item.weekday.kind\"\n            }\n          }\n        }\n      ]\n    },\n    {\n      \"kind\": \"struct\",\n      \"id\": \"@gepheum/skir-golden-tests/goldens.skir:KeyedArrays.Item\",\n      \"fields\": [\n        {\n          \"name\": \"sub_item\",\n          \"number\": 0,\n          \"type\": {\n            \"kind\": \"record\",\n            \"value\": \"@gepheum/skir-golden-tests/goldens.skir:KeyedArrays.SubItem\"\n          }\n        }\n      ]\n    },\n    {\n      \"kind\": \"struct\",\n      \"id\": \"@gepheum/skir-golden-tests/goldens.skir:KeyedArrays.SubItem\",\n      \"fields\": [\n        {\n          \"name\": \"weekday\",\n          \"number\": 0,\n          \"type\": {\n            \"kind\": \"record\",\n            \"value\": \"@gepheum/skir-golden-tests/goldens.skir:KeyedArrays.Weekday\"\n          }\n        }\n      ]\n    },\n    {\n      \"kind\": \"enum\",\n      \"id\": \"@gepheum/skir-golden-tests/goldens.skir:KeyedArrays.Weekday\",\n      \"variants\": [\n        {\n          \"name\": \"MONDAY\",\n          \"number\": 1\n        }\n      ]\n    }\n  ]\n}",
+        expected_type_descriptor: "{\n  \"type\": {\n    \"kind\": \"record\",\n    \"value\": \"@gepheum/skir-golden-tests/goldens.skir:KeyedArrays\"\n  },\n  \"records\": [\n    {\n      \"kind\": \"struct\",\n      \"id\": \"@gepheum/skir-golden-tests/goldens.skir:KeyedArrays\",\n      \"fields\": [\n        {\n          \"name\": \"items\",\n          \"number\": 0,\n          \"type\": {\n            \"kind\": \"array\",\n            \"value\": {\n              \"item\": {\n                \"kind\": \"record\",\n                \"value\": \"@gepheum/skir-golden-tests/goldens.skir:KeyedArrays.Item\"\n              },\n              \"key_extractor\": \"sub_item.weekday.kind\"\n            }\n          }\n        }\n      ]\n    },\n    {\n      \"kind\": \"struct\",\n      \"id\": \"@gepheum/skir-golden-tests/goldens.skir:KeyedArrays.Item\",\n      \"fields\": [\n        {\n          \"name\": \"sub_item\",\n          \"number\": 0,\n          \"type\": {\n            \"kind\": \"record\",\n            \"value\": \"@gepheum/skir-golden-tests/goldens.skir:KeyedArrays.SubItem\"\n          }\n        }\n      ]\n    },\n    {\n      \"kind\": \"struct\",\n      \"id\": \"@gepheum/skir-golden-tests/goldens.skir:KeyedArrays.SubItem\",\n      \"fields\": [\n        {\n          \"name\": \"weekday\",\n          \"number\": 0,\n          \"type\": {\n            \"kind\": \"record\",\n            \"value\": \"@gepheum/skir-golden-tests/goldens.skir:KeyedArrays.Weekday\"\n          }\n        }\n      ]\n    },\n    {\n      \"kind\": \"enum\",\n      \"id\": \"@gepheum/skir-golden-tests/goldens.skir:KeyedArrays.Weekday\",\n      \"variants\": [\n        {\n          \"name\": \"monday\",\n          \"number\": 1\n        }\n      ]\n    }\n  ]\n}",
       |},
     },
   },
@@ -2313,7 +2313,7 @@ const UNIT_TESTS: [UnitTest] = [
             kind: "e",
             value: {
               kind: "e",
-              value: "FOO",
+              value: "foo",
             },
           },
         },
@@ -2343,7 +2343,7 @@ const UNIT_TESTS: [UnitTest] = [
               kind: "to_dense_json",
               value: {
                 kind: "enum_a",
-                value: "A",
+                value: "a",
               },
             },
           },
@@ -2365,7 +2365,7 @@ const UNIT_TESTS: [UnitTest] = [
               kind: "to_bytes",
               value: {
                 kind: "enum_a",
-                value: "A",
+                value: "a",
               },
             },
           },
@@ -2487,7 +2487,7 @@ const UNIT_TESTS: [UnitTest] = [
           kind: "to_dense_json",
           value: {
             kind: "enum_a",
-            value: "A",
+            value: "a",
           },
         },
         expected: "",
@@ -2504,7 +2504,7 @@ const UNIT_TESTS: [UnitTest] = [
           kind: "to_bytes",
           value: {
             kind: "enum_a",
-            value: "A",
+            value: "a",
           },
         },
         expected: "",
@@ -2559,7 +2559,7 @@ const UNIT_TESTS: [UnitTest] = [
           kind: "to_dense_json",
           value: {
             kind: "enum_a",
-            value: "A",
+            value: "a",
           },
         },
         expected: "",
@@ -2576,7 +2576,7 @@ const UNIT_TESTS: [UnitTest] = [
           kind: "to_bytes",
           value: {
             kind: "enum_a",
-            value: "A",
+            value: "a",
           },
         },
         expected: "",
