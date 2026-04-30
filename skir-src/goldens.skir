@@ -1349,13 +1349,13 @@ const UNIT_TESTS: [UnitTest] = [
       value: {|
         value: {
           kind: "my_enum",
-          value: "UNKNOWN",
+          value: "unknown",
         },
         expected_dense_json: [
           "0",
         ],
         expected_readable_json: [
-          '"UNKNOWN"',
+          '"unknown"',
         ],
         alternative_jsons: [
           {
@@ -2321,12 +2321,12 @@ const UNIT_TESTS: [UnitTest] = [
           "[2,[2,1]]",
         ],
         expected_readable_json: [
-          "{\n  \"kind\": \"e\",\n  \"value\": {\n    \"kind\": \"e\",\n    \"value\": \"FOO\"\n  }\n}",
+          "{\n  \"kind\": \"e\",\n  \"value\": {\n    \"kind\": \"e\",\n    \"value\": \"foo\"\n  }\n}",
         ],
         expected_bytes: [
           "hex:736b6972fcfc01",
         ],
-        expected_type_descriptor: "{\n  \"type\": {\n    \"kind\": \"record\",\n    \"value\": \"@gepheum/skir-golden-tests/goldens.skir:RecEnum\"\n  },\n  \"records\": [\n    {\n      \"kind\": \"enum\",\n      \"id\": \"@gepheum/skir-golden-tests/goldens.skir:RecEnum\",\n      \"variants\": [\n        {\n          \"name\": \"FOO\",\n          \"number\": 1\n        },\n        {\n          \"name\": \"e\",\n          \"number\": 2,\n          \"type\": {\n            \"kind\": \"record\",\n            \"value\": \"@gepheum/skir-golden-tests/goldens.skir:RecEnum\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+        expected_type_descriptor: "{\n  \"type\": {\n    \"kind\": \"record\",\n    \"value\": \"@gepheum/skir-golden-tests/goldens.skir:RecEnum\"\n  },\n  \"records\": [\n    {\n      \"kind\": \"enum\",\n      \"id\": \"@gepheum/skir-golden-tests/goldens.skir:RecEnum\",\n      \"variants\": [\n        {\n          \"name\": \"foo\",\n          \"number\": 1\n        },\n        {\n          \"name\": \"e\",\n          \"number\": 2,\n          \"type\": {\n            \"kind\": \"record\",\n            \"value\": \"@gepheum/skir-golden-tests/goldens.skir:RecEnum\"\n          }\n        }\n      ]\n    }\n  ]\n}",
       |},
     },
   },
